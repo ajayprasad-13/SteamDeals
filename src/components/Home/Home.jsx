@@ -69,7 +69,10 @@ export default function Home() {
 function GameData({ game }) {
   return (
     <div className="gameData-container">
-      <a href={`https://store.steampowered.com/app/${game.steamAppID}`}>
+      <a
+        target="_blank"
+        href={`https://store.steampowered.com/app/${game.steamAppID}`}
+      >
         <div className="gameData">
           <div className="gameData-leftSection">
             <img

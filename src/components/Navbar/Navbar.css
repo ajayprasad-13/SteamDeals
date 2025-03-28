@@ -57,3 +57,11 @@
 .search-input::placeholder {
   color: rgb(229, 198, 198);
 }
+
+.search-icon {
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  top: 33px;
+  left: 625px;
+}

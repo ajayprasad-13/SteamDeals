@@ -1,5 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "./PriceHistory.css";
 import { Navbar } from "../Navbar/Navbar";
 import { SearchContext } from "../SearchQuery";
@@ -75,11 +78,24 @@ export default function PriceHistory() {
 }
 
 function PriceData({ game }) {
+  const handleRedirect = () => {
+    if (game.steamAppID) {
+      window.open(
+        `https://store.steampowered.com/app/${game.steamAppID}`,
+        "_blank"
+      );
+    } else {
+      toast.error("Not available on Steam");
+    }
+  };
+
   return (
     <div className="gameData-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <a
-        target="_blank"
-        href={`https://store.steampowered.com/app/${game.steamAppID}`}
+        onClick={handleRedirect}
+        // target="_blank"
+        // href={`https://store.steampowered.com/app/${game.steamAppID}`}
       >
         <div className="gameData">
           <div className="gameData-leftSection">

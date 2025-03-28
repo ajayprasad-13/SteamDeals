@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { SearchContext } from "../SearchQuery";
@@ -26,6 +29,7 @@ export function Navbar() {
       <div className="navbar-container">
         <p className="navbar-title">STEAM DEALS</p>
         <span>
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input
             value={searchQuery}
             onChange={handleSearch}

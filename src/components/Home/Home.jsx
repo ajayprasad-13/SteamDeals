@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import "./Home.css";
-import { useNavigate } from "react-router-dom";
+import "./Home.css"
+import Pagination from "../Pagination/Pagination";
 
 export default function Home() {
   const [res, setRes] = useState([]);
   const [value, setValue] = useState(["0"]);
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(15)
 
   const fetchData = async () => {
     const response = await fetch(
@@ -23,6 +26,10 @@ export default function Home() {
   useEffect(() => {
     fetchData();
   }, [value]);
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = res.slice(firstPostIndex, lastPostIndex)
 
   return (
     <div className="home-container">
@@ -55,13 +62,20 @@ export default function Home() {
       </div>
       <div>
         {res.length > 0 ? (
-          res.map((game, index) => <GameData key={index} game={game} />)
+          currentPosts.map((game, index) => <GameData key={index} game={game} />)
         ) : (
           <div className="loader-container">
             <div className="loader"></div>
           </div>
         )}
       </div>
+      <Pagination 
+  totalPosts={res.length} 
+  postsPerPage={postsPerPage} 
+  paginate={setCurrentPage} 
+  currentPage = {currentPage}
+/>
+
     </div>
   );
 }
@@ -88,6 +102,7 @@ function GameData({ game }) {
             <p>{game.steamRatingText}</p>
           </div>
         </div>
+        
       </a>
     </div>
   );
